@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	#endregion
 
 	#region Private variables
+	private Animator anim;
 	private Collider2D nextTile;
 	private Vector3 destination;
 	private Vector3 interactionPoint;
@@ -19,15 +20,26 @@ public class Player : MonoBehaviour
 	private bool isMoving = false;
 	#endregion
 
+	void Start()
+	{
+		anim = this.GetComponentInChildren<Animator>();
+	}
+
 	void Update()
 	{
-		if(inputV == 0)
-		inputH = Input.GetAxisRaw("Horizontal");
-		if(inputH == 0)
-		inputV = Input.GetAxisRaw("Vertical");
+		ReadingInputs();
+		MovementsAndAnimations();
 
+	}
+
+	private void MovementsAndAnimations()
+	{
 		if (!isMoving && (inputH != 0 || inputV != 0))
 		{
+			anim.SetBool("isRunning", true);
+			anim.SetFloat("inputH", inputH);
+			anim.SetFloat("inputV", inputV);
+
 			lastInput = new Vector3(inputH, inputV, 0);
 			destination = this.transform.position + lastInput;
 			interactionPoint = destination;
@@ -38,6 +50,18 @@ public class Player : MonoBehaviour
 				StartCoroutine(Move());
 			}
 		}
+		else if (inputH == 0 && inputV == 0)
+		{
+			anim.SetBool("isRunning", false);
+		}
+	}
+
+	private void ReadingInputs()
+	{
+		if (inputV == 0)
+			inputH = Input.GetAxisRaw("Horizontal");
+		if (inputH == 0)
+			inputV = Input.GetAxisRaw("Vertical");
 	}
 
 	#region Coroutines
