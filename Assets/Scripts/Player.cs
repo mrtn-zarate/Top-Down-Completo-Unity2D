@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 	private Vector3 lastInput;
 	private float inputH;
 	private float inputV;
+	private bool inputAttack;
 	private bool isMoving = false;
 	#endregion
 
@@ -29,7 +30,15 @@ public class Player : MonoBehaviour
 	{
 		ReadingInputs();
 		MovementsAndAnimations();
+		AttackSystem();
+	}
 
+	private void AttackSystem()
+	{
+		if (inputAttack)
+		{
+			anim.SetTrigger("isAttacking");
+		}
 	}
 
 	private void MovementsAndAnimations()
@@ -62,6 +71,8 @@ public class Player : MonoBehaviour
 			inputH = Input.GetAxisRaw("Horizontal");
 		if (inputH == 0)
 			inputV = Input.GetAxisRaw("Vertical");
+
+		inputAttack = Input.GetButtonDown("Attack");
 	}
 
 	#region Coroutines
