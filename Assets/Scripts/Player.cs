@@ -1,6 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Component used to control the player and all the basic behaviours
+/// </summary>
+[RequireComponent(typeof(LifeSystem))]
 public class Player : MonoBehaviour
 {
 	#region Public variables
