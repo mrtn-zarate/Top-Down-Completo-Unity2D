@@ -8,9 +8,16 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	#region Public variables
+	[Header("Movement Parameters")]
 	[SerializeField] private float moveVelocity;
 	[SerializeField] private float interactionRadius;
 	[SerializeField] private LayerMask collisionLayer;
+
+	[Header("Attack Parameters")]
+	[SerializeField] private Transform attackPoint;
+	[SerializeField] private float radioAttack;
+	[SerializeField] private float attackDamage;
+	[SerializeField] private LayerMask layerToAttack;
 	#endregion
 
 	#region Private variables
@@ -42,6 +49,14 @@ public class Player : MonoBehaviour
 		if (inputAttack)
 		{
 			anim.SetTrigger("isAttacking");
+
+			Collider2D[] colliders = Physics2D.OverlapCircleAll(interactionPoint, radioAttack, layerToAttack);
+
+			foreach (Collider2D item in colliders)
+			{
+				LifeSystem lf = item.gameObject.GetComponent<LifeSystem>();
+				lf.ReceiveDamage(attackDamage);
+			}
 		}
 	}
 
@@ -107,7 +122,8 @@ public class Player : MonoBehaviour
 	#region Testing
 	private void OnDrawGizmos()
 	{
-		Gizmos.DrawSphere(interactionPoint, interactionRadius);
+		// Gizmos.DrawSphere(interactionPoint, interactionRadius);
+		Gizmos.DrawSphere(interactionPoint, radioAttack);
 	}
 	#endregion
 }

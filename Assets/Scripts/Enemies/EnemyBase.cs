@@ -32,6 +32,9 @@ public class EnemyBase : MonoBehaviour
 	void Start()
 	{
 		lifeSystem.OnReceiveDamage.AddListener((value) => ReceiveDamage());
+
+		currentDestination = waypoints[currentIndex].position;
+		FocusToDestination();
 	}
 
 	private void OnEnable()
@@ -53,7 +56,12 @@ public class EnemyBase : MonoBehaviour
 
 		currentDestination = waypoints[currentIndex].position;
 		FocusToDestination();
+	}
 
+	protected void SetNewDestination(Vector3 toPosition)
+	{
+		currentDestination = toPosition;
+		FocusToDestination();
 	}
 
 	private void FocusToDestination()
@@ -70,7 +78,7 @@ public class EnemyBase : MonoBehaviour
 	#endregion
 
 	#region Triggers
-	private void OnTriggerEnter2D(Collider2D collision)
+	public virtual void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.CompareTag("PlayerDetection"))
 		{
@@ -79,7 +87,7 @@ public class EnemyBase : MonoBehaviour
 		}
 		else if (collision.gameObject.CompareTag("PlayerHitbox"))
 		{
-			Debug.Log("Player Atacado");
+			// Debug.Log("Player Atacado");
 			LifeSystem lf = collision.gameObject.GetComponent<LifeSystem>();
 			lf.ReceiveDamage(attackDamage);
 		}
@@ -92,7 +100,7 @@ public class EnemyBase : MonoBehaviour
 		while (true)
 		{
 			while (this.transform.position != currentDestination)
-			{
+			{	
 				this.transform.position = Vector3.MoveTowards(
 					this.transform.position,
 					currentDestination,

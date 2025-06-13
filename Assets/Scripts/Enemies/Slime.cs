@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Slime : EnemyBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
+    #region Triggers
+	public override void OnTriggerEnter2D(Collider2D collision)
+	{
+        base.OnTriggerEnter2D(collision);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        if (collision.gameObject.CompareTag("PlayerDetection"))
+        {
+            //Corremos hacia el jugador
+            // Debug.Log("Player Detectado");
+            base.SetNewDestination(collision.transform.position);
+        }
+	}
+	#endregion
 }
