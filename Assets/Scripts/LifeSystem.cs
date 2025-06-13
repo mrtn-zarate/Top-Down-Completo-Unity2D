@@ -18,6 +18,8 @@ public class LifeSystem : MonoBehaviour
 		if (life <= 0)
 		{
 			OnDeath?.Invoke();
+
+			//Esperar medio segundo a reproducir animacion de muerte
 			Destroy(this.gameObject);
 		}
 	}

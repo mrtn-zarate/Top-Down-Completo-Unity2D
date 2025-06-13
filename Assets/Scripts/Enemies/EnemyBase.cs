@@ -18,6 +18,7 @@ public class EnemyBase : MonoBehaviour
 	#region Private variables
 	private Vector3 currentDestination;
 	private int currentIndex;
+	private bool isWalking;
 
 	private Animator anim;
 	private LifeSystem lifeSystem;
@@ -101,6 +102,8 @@ public class EnemyBase : MonoBehaviour
 		{
 			while (this.transform.position != currentDestination)
 			{	
+				anim.SetBool("isWalking", true);
+
 				this.transform.position = Vector3.MoveTowards(
 					this.transform.position,
 					currentDestination,
