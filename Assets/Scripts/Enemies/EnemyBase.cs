@@ -33,15 +33,21 @@ public class EnemyBase : MonoBehaviour
 
 	void Start()
 	{
+		// lifeSystem.OnReceiveDamage.AddListener((value) => ReceiveDamage());
+		// lifeSystem.OnDeath.AddListener(() => Dead());
+
+		// currentDestination = waypoints[currentIndex].position;
+		// FocusToDestination();
+	}
+
+	private void OnEnable()
+	{
 		lifeSystem.OnReceiveDamage.AddListener((value) => ReceiveDamage());
 		lifeSystem.OnDeath.AddListener(() => Dead());
 
 		currentDestination = waypoints[currentIndex].position;
 		FocusToDestination();
-	}
 
-	private void OnEnable()
-	{
 		StartCoroutine(Patrol());
 	}
 
