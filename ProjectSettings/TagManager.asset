@@ -9,6 +9,7 @@ TagManager:
   - EnemyDetection
   - EnemyHitbox
   - InteractionPoint
+  - InteractionObject
   layers:
   - Default
   - TransparentFX

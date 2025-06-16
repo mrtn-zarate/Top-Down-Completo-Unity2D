@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalData : MonoBehaviour
+public static class GlobalData
 {
 	#region Scene Names
 	public enum SceneName

@@ -13,8 +13,8 @@ public class SceneChanger : MonoBehaviour
 	public static SceneChanger Instance { get; private set; }
 	public UnityEvent OnSceneLoadComplete = new UnityEvent();
 
-	[SerializeField] private GameObject transitionPanel;
-	[SerializeField] private List<Animator> animTransition;
+	// [SerializeField] private GameObject transitionPanel;
+	// [SerializeField] private List<Animator> animTransition;
 
 	void Awake()
 	{
@@ -31,7 +31,7 @@ public class SceneChanger : MonoBehaviour
 
 	void Start()
 	{
-		transitionPanel.SetActive(false);
+		// transitionPanel.SetActive(false);
 	}
 
 	public void LoadSceneAsync(string sceneName)
@@ -46,12 +46,12 @@ public class SceneChanger : MonoBehaviour
 
 	private IEnumerator LoadSceneCoroutine(string sceneName)
 	{
-		transitionPanel.SetActive(true);
-		foreach (Animator anim in animTransition)
-		{
-			anim.SetBool("isEntrance", true);
-			anim.SetTrigger("transition");	
-		}
+		// transitionPanel.SetActive(true);
+		// foreach (Animator anim in animTransition)
+		// {
+		// 	anim.SetBool("isEntrance", true);
+		// 	anim.SetTrigger("transition");	
+		// }
 
 		yield return new WaitForSeconds(2f);
 
@@ -62,24 +62,24 @@ public class SceneChanger : MonoBehaviour
 			yield return null;
 		}
 
-		foreach (Animator anim in animTransition)
-		{
-			anim.SetBool("isEntrance", false);
-			anim.SetTrigger("transition");
-		}
+		// foreach (Animator anim in animTransition)
+		// {
+		// 	anim.SetBool("isEntrance", false);
+		// 	anim.SetTrigger("transition");
+		// }
 		yield return new WaitForSeconds(2f);
-		transitionPanel.SetActive(false);
+		// transitionPanel.SetActive(false);
 		OnSceneLoadComplete?.Invoke();
 	}
 
 	private IEnumerator LoadSceneCoroutine(int sceneNumber)
 	{
-		transitionPanel.SetActive(true);
-		foreach (Animator anim in animTransition)
-		{
-			anim.SetBool("isEntrance", true);
-			anim.SetTrigger("transition");	
-		}
+		// transitionPanel.SetActive(true);
+		// foreach (Animator anim in animTransition)
+		// {
+		// 	anim.SetBool("isEntrance", true);
+		// 	anim.SetTrigger("transition");	
+		// }
 		yield return new WaitForSeconds(2f);
 
 		AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneNumber);
@@ -89,13 +89,13 @@ public class SceneChanger : MonoBehaviour
 			yield return null;
 		}
 
-		foreach (Animator anim in animTransition)
-		{
-			anim.SetBool("isEntrance", false);
-			anim.SetTrigger("transition");
-		}
+		// foreach (Animator anim in animTransition)
+		// {
+		// 	anim.SetBool("isEntrance", false);
+		// 	anim.SetTrigger("transition");
+		// }
 		yield return new WaitForSeconds(2f);
-		transitionPanel.SetActive(false);
+		// transitionPanel.SetActive(false);
 		OnSceneLoadComplete?.Invoke();
 	}
 }

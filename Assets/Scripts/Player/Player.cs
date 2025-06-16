@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
 	private bool isInteracting = false;
 	private bool isMoving = false;
 	private bool isDead = false;
+	private GameObject currentObject = null;
 	#endregion
 
 	void Awake()
@@ -75,6 +76,11 @@ public class Player : MonoBehaviour
 			if (isInteracting)
 			{
 				//Activar mensaje de dialogo
+
+				if (currentObject)
+				{
+					Destroy(currentObject);
+				}
 				return;
 			}
 
@@ -164,22 +170,25 @@ public class Player : MonoBehaviour
 	#region Triggers
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.CompareTag("InteractionPoint"))
+		if (collision.CompareTag("InteractionPoint") || collision.CompareTag("InteractionObject"))
 		{
-
 			animTalk.gameObject.SetActive(true);
 			animTalk.SetBool("isQuestion", true);
 			isInteracting = true;
+
+			if (collision.CompareTag("InteractionObject")) currentObject = collision.gameObject;
 		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.CompareTag("InteractionPoint"))
+		if (collision.CompareTag("InteractionPoint") || collision.CompareTag("InteractionObject"))
 		{
 			animTalk.gameObject.SetActive(false);
 			animTalk.SetBool("isQuestion", false);
 			isInteracting = false;
+
+			if (collision.CompareTag("InteractionObject")) currentObject = null;
 		}
 	}
 	#endregion
