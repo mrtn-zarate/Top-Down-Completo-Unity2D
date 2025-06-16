@@ -7,7 +7,15 @@ public class MenuButtonsScript : MonoBehaviour
 {
     public GameObject canvas;
     public GameObject transitionPanel;
-    void Start()
+
+    private SceneChanger sceneChanger;
+
+	void Awake()
+	{
+		sceneChanger = FindAnyObjectByType<SceneChanger>();
+	}
+
+	void Start()
     {
         transitionPanel.SetActive(false);
     }
@@ -15,28 +23,38 @@ public class MenuButtonsScript : MonoBehaviour
     {
         transitionPanel.SetActive(true);
         Invoke("gotomainmenu", 1f);
+        // gotomainmenu();
     }
     public void credits_button()
     {
         transitionPanel.SetActive(true);
         Invoke("gotocredits", 1f);
+        // gotocredits();
     }
     public void startthegame_button()
     {
         transitionPanel.SetActive(true);
         Invoke("gotonextlevel", 1f);
+        // gotonextlevel();
     }
     void gotonextlevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        // sceneChanger.LoadSceneAsync((int)GlobalData.SceneName.Overworld);
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene((int)GlobalData.SceneName.Overworld);
     }
     public void gotomainmenu()
     {
-        SceneManager.LoadScene("MainMenu");
+
+        // sceneChanger.LoadSceneAsync((int)GlobalData.SceneName.MainMenu);
+        // SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene((int)GlobalData.SceneName.MainMenu);
     }
     public void gotocredits()
     {
-        SceneManager.LoadScene("Credits");
+        // sceneChanger.LoadSceneAsync((int)GlobalData.SceneName.Credits);
+        // SceneManager.LoadScene("Credits");
+        SceneManager.LoadScene((int)GlobalData.SceneName.Credits);
     }
     public void quitgame()
     {

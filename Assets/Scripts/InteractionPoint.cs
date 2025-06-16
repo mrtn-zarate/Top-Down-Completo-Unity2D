@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class InteractionPoint : MonoBehaviour
 {
+
+	
+
 	[SerializeField] private SODialogue currentDialogue;
 }
