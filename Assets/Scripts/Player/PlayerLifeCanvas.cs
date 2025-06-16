@@ -11,7 +11,7 @@ public class PlayerLifeCanvas : MonoBehaviour
 
 	void Start()
 	{
-		lifeSystemReference.OnReceiveDamage.AddListener((value) => SetVisualLife(value));
+		lifeSystemReference.OnRemainingLife.AddListener((value) => SetVisualLife(value));
 	}
 
 	private void SetVisualLife(float value)

@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 	private float inputH;
 	private float inputV;
 	private bool inputAttack;
+	private bool isInteracting = false;
 	private bool isMoving = false;
 	private bool isDead = false;
 	#endregion
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
 
 	void Start()
 	{
+		lifeSystem.OnReceiveDamage.AddListener((value)=> ReceiveDamage());
 		lifeSystem.OnDeath.AddListener(() => Dead());
 
 		animTalk.gameObject.SetActive(false);
@@ -63,10 +65,19 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	#region Private Methods
+
 	private void AttackSystem()
 	{
 		if (inputAttack)
 		{
+
+			if (isInteracting)
+			{
+				//Activar mensaje de dialogo
+				return;
+			}
+
 			anim.SetTrigger("isAttacking");
 
 			Collider2D[] colliders = Physics2D.OverlapCircleAll(interactionPoint, radioAttack, layerToAttack);
@@ -113,11 +124,22 @@ public class Player : MonoBehaviour
 		inputAttack = Input.GetButtonDown("Attack");
 	}
 
+	private void ReceiveDamage()
+	{
+		anim.SetTrigger("isHitting");
+	}
+
 	private void Dead()
 	{
 		isDead = true;
 		anim.SetTrigger("isDead");
 	}
+
+	private Collider2D CheckNextTile()
+	{
+		return Physics2D.OverlapCircle(interactionPoint, interactionRadius, collisionLayer);
+	}
+	#endregion
 
 	#region Coroutines
 	/// <summary>
@@ -139,10 +161,28 @@ public class Player : MonoBehaviour
 	}
 	#endregion
 
-	private Collider2D CheckNextTile()
+	#region Triggers
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		return Physics2D.OverlapCircle(interactionPoint, interactionRadius, collisionLayer);
+		if (collision.CompareTag("InteractionPoint"))
+		{
+
+			animTalk.gameObject.SetActive(true);
+			animTalk.SetBool("isQuestion", true);
+			isInteracting = true;
+		}
 	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.CompareTag("InteractionPoint"))
+		{
+			animTalk.gameObject.SetActive(false);
+			animTalk.SetBool("isQuestion", false);
+			isInteracting = false;
+		}
+	}
+	#endregion
 
 	#region Testing
 	private void OnDrawGizmos()
