@@ -18,9 +18,16 @@ public class Player : MonoBehaviour
 	[SerializeField] private float radioAttack;
 	[SerializeField] private float attackDamage;
 	[SerializeField] private LayerMask layerToAttack;
+
+	[Header("Life References")]
+	[SerializeField] private SpriteRenderer lifeReference;
+
+	[Header("Talk parameters")]
+	[SerializeField] private Animator animTalk;
 	#endregion
 
 	#region Private variables
+	private LifeSystem lifeSystem;
 	private Animator anim;
 	private Collider2D nextTile;
 	private Vector3 destination;
@@ -30,18 +37,30 @@ public class Player : MonoBehaviour
 	private float inputV;
 	private bool inputAttack;
 	private bool isMoving = false;
+	private bool isDead = false;
 	#endregion
+
+	void Awake()
+	{
+		anim = this.GetComponentInChildren<Animator>();
+		lifeSystem = this.GetComponent<LifeSystem>();
+	}
 
 	void Start()
 	{
-		anim = this.GetComponentInChildren<Animator>();
+		lifeSystem.OnDeath.AddListener(() => Dead());
+
+		animTalk.gameObject.SetActive(false);
 	}
 
 	void Update()
 	{
-		ReadingInputs();
-		MovementsAndAnimations();
-		AttackSystem();
+		if (!isDead)
+		{
+			ReadingInputs();
+			MovementsAndAnimations();
+			AttackSystem();
+		}
 	}
 
 	private void AttackSystem()
@@ -92,6 +111,12 @@ public class Player : MonoBehaviour
 			inputV = Input.GetAxisRaw("Vertical");
 
 		inputAttack = Input.GetButtonDown("Attack");
+	}
+
+	private void Dead()
+	{
+		isDead = true;
+		anim.SetTrigger("isDead");
 	}
 
 	#region Coroutines

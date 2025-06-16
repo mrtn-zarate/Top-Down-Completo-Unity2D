@@ -19,6 +19,7 @@ public class EnemyBase : MonoBehaviour
 	private Vector3 currentDestination;
 	private int currentIndex;
 	private bool isWalking;
+	private bool isDead = false;
 
 	private Animator anim;
 	private LifeSystem lifeSystem;
@@ -33,6 +34,7 @@ public class EnemyBase : MonoBehaviour
 	void Start()
 	{
 		lifeSystem.OnReceiveDamage.AddListener((value) => ReceiveDamage());
+		lifeSystem.OnDeath.AddListener(() => Dead());
 
 		currentDestination = waypoints[currentIndex].position;
 		FocusToDestination();
@@ -48,6 +50,12 @@ public class EnemyBase : MonoBehaviour
 	private void ReceiveDamage()
 	{
 		anim.SetTrigger("hit");
+	}
+
+	private void Dead()
+	{
+		anim.SetTrigger("isDead");
+		isDead = true;
 	}
 
 	private void SetNewDestination()
@@ -98,10 +106,10 @@ public class EnemyBase : MonoBehaviour
 	#region Coroutines
 	private IEnumerator Patrol()
 	{
-		while (true)
+		while (!isDead)
 		{
-			while (this.transform.position != currentDestination)
-			{	
+			while ((this.transform.position != currentDestination) && !isDead)
+			{
 				anim.SetBool("isWalking", true);
 
 				this.transform.position = Vector3.MoveTowards(
@@ -114,6 +122,9 @@ public class EnemyBase : MonoBehaviour
 
 			SetNewDestination();
 		}
+
+		yield return new WaitForSeconds(0.5f);
+		Destroy(this.transform.parent.gameObject);
 	}
 
 	#endregion
