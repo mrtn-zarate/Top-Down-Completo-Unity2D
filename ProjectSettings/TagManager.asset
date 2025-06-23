@@ -10,6 +10,7 @@ TagManager:
   - EnemyHitbox
   - InteractionPoint
   - InteractionObject
+  - InteractionPilar
   layers:
   - Default
   - TransparentFX

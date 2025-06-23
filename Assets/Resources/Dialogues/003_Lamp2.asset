@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b103fb535a38c140a9a0f32e6708262, type: 3}
-  m_Name: 002_Lamp1
+  m_Name: 003_Lamp2
   m_EditorClassIdentifier: 
   dialogues:
-  - name: Lantern
-    message: Congrats! you found a magic Lantern
+  - id: 20
+    name: Lantern
+    message: Wow! look at this magic lantern!
+    objectReference: {fileID: 6930962374729838567, guid: f75c301390b208844a39d75ae7ccf933, type: 3}

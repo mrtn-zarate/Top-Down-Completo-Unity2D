@@ -8,9 +8,11 @@ public class SODialogue : ScriptableObject
 	[System.Serializable]
 	public class Dialogue
 	{
+		public int id;
 		public string name;
-		[TextArea(3,10)]
+		[TextArea(3, 10)]
 		public string message;
+		public GameObject objectReference;
 	}
 
 	public List<Dialogue> dialogues = new List<Dialogue>();

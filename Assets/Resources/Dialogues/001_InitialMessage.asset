@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b103fb535a38c140a9a0f32e6708262, type: 3}
   m_Name: 001_InitialMessage
   m_EditorClassIdentifier: 
-  dialogues: []
+  dialogues:
+  - id: 1
+    name: Sign
+    message: Welcome to Lantern Village, lately we have some serious problems with
+      monster, the only way to return the peace is recover the magical lanterns.
+    objectReference: {fileID: 0}

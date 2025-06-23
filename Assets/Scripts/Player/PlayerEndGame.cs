@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class EndGameTrigger : MonoBehaviour
 {
-    public GameObject puerta;             // Asigna aquí la puerta en el editor
+    public GameObject puerta;             // Asigna aquï¿½ la puerta en el editor
     public GameObject mensajeFinalUI;     // UI con "Gracias por jugar"
 
     private bool gPressed = false;
@@ -29,7 +29,7 @@ public class EndGameTrigger : MonoBehaviour
     {
         if (puerta != null)
         {
-            puerta.SetActive(false);  // "Abre" la puerta desactivándola
+            puerta.SetActive(false);  // "Abre" la puerta desactivï¿½ndola
         }
 
         if (mensajeFinalUI != null)

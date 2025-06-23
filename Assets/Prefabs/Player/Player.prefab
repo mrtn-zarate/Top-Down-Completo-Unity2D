@@ -647,6 +647,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5591611543705863864}
   - component: {fileID: 2497175361441980656}
+  - component: {fileID: 2748307813585933021}
   - component: {fileID: 2247945236342280141}
   - component: {fileID: 4648211779511215954}
   - component: {fileID: 8881142192395655047}
@@ -704,6 +705,20 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2748307813585933021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5058152724007681916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8fd38e8df10e4048acb75d9ebde5762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySpace1: {fileID: 2277017388741851862}
+  inventorySpace2: {fileID: 5209698604698063028}
 --- !u!114 &2247945236342280141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,7 +742,6 @@ MonoBehaviour:
   layerToAttack:
     serializedVersion: 2
     m_Bits: 128
-  lifeReference: {fileID: 0}
   animTalk: {fileID: 6058390059695104638}
 --- !u!61 &4648211779511215954
 BoxCollider2D:

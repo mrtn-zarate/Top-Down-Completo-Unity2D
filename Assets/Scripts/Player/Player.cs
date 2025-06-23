@@ -19,15 +19,13 @@ public class Player : MonoBehaviour
 	[SerializeField] private float attackDamage;
 	[SerializeField] private LayerMask layerToAttack;
 
-	[Header("Life References")]
-	[SerializeField] private SpriteRenderer lifeReference;
-
 	[Header("Talk parameters")]
 	[SerializeField] private Animator animTalk;
 	#endregion
 
 	#region Private variables
 	private LifeSystem lifeSystem;
+	private InventorySystem inventorySystem;
 	private Animator anim;
 	private Collider2D nextTile;
 	private Vector3 destination;
@@ -40,12 +38,14 @@ public class Player : MonoBehaviour
 	private bool isMoving = false;
 	private bool isDead = false;
 	private GameObject currentObject = null;
+	private QuestSystem currentQuestSystem = null;
 	#endregion
 
 	void Awake()
 	{
 		anim = this.GetComponentInChildren<Animator>();
 		lifeSystem = this.GetComponent<LifeSystem>();
+		inventorySystem = this.GetComponent<InventorySystem>();
 	}
 
 	void Start()
@@ -75,11 +75,21 @@ public class Player : MonoBehaviour
 
 			if (isInteracting)
 			{
+
+				//Triggereo con un quest
+				if (currentQuestSystem != null)
+				{
+					Debug.Log("Poner la lamparaaa");
+					currentQuestSystem.PutLamp(inventorySystem.GetLampFromInventory());
+				}
+
+
 				//Activar mensaje de dialogo
 
 				if (currentObject)
 				{
-					Destroy(currentObject);
+					// Destroy(currentObject);
+					inventorySystem.AddToInventory(currentObject);
 				}
 				return;
 			}
@@ -170,25 +180,31 @@ public class Player : MonoBehaviour
 	#region Triggers
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.CompareTag("InteractionPoint") || collision.CompareTag("InteractionObject"))
+		if (collision.CompareTag("InteractionPoint") ||
+			collision.CompareTag("InteractionObject") ||
+			collision.CompareTag("InteractionPilar"))
 		{
 			animTalk.gameObject.SetActive(true);
 			animTalk.SetBool("isQuestion", true);
 			isInteracting = true;
 
 			if (collision.CompareTag("InteractionObject")) currentObject = collision.gameObject;
+			if(collision.CompareTag("InteractionPilar")) currentQuestSystem = collision.GetComponent<QuestSystem>();
 		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.CompareTag("InteractionPoint") || collision.CompareTag("InteractionObject"))
+		if (collision.CompareTag("InteractionPoint") ||
+			collision.CompareTag("InteractionObject") ||
+			collision.CompareTag("InteractionPilar"))
 		{
 			animTalk.gameObject.SetActive(false);
 			animTalk.SetBool("isQuestion", false);
 			isInteracting = false;
 
 			if (collision.CompareTag("InteractionObject")) currentObject = null;
+			if (collision.CompareTag("InteractionPilar")) currentQuestSystem = null;
 		}
 	}
 	#endregion

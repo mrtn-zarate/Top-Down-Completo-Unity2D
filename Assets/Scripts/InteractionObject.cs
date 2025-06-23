@@ -7,5 +7,8 @@ public class InteractionObject : MonoBehaviour
 	[SerializeField] private GameObject objectReference;
 	[SerializeField] private SODialogue currentDialogue;
 
-	
+	public SODialogue GetSO()
+	{
+		return currentDialogue;
+	}
 }

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b103fb535a38c140a9a0f32e6708262, type: 3}
-  m_Name: 001_InitialMessage
+  m_Name: 002_Lamp1
   m_EditorClassIdentifier: 
   dialogues:
-  - name: Sign
-    message: Welcome to Lantern Village, lately we have some serious problems with
-      monster, the only way to return the peace is recover the magical lanterns.
+  - id: 10
+    name: Lantern
+    message: Congrats! you found a magic Lantern
+    objectReference: {fileID: 4362432406463622100, guid: 626722d26043b7647b78f9c88a9c07f8, type: 3}
