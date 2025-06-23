@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 	#region Private variables
 	private LifeSystem lifeSystem;
 	private InventorySystem inventorySystem;
+	private DialogueManager dialogueManager;
 	private Animator anim;
 	private Collider2D nextTile;
 	private Vector3 destination;
@@ -35,10 +36,13 @@ public class Player : MonoBehaviour
 	private float inputV;
 	private bool inputAttack;
 	private bool isInteracting = false;
+	private bool isDialogue = false;
+	private bool isDialogueControl = false;
 	private bool isMoving = false;
 	private bool isDead = false;
 	private GameObject currentObject = null;
 	private QuestSystem currentQuestSystem = null;
+	private DialogueLine[] currentDialogue = null;
 	#endregion
 
 	void Awake()
@@ -46,12 +50,14 @@ public class Player : MonoBehaviour
 		anim = this.GetComponentInChildren<Animator>();
 		lifeSystem = this.GetComponent<LifeSystem>();
 		inventorySystem = this.GetComponent<InventorySystem>();
+		dialogueManager = this.GetComponentInChildren<DialogueManager>();
 	}
 
 	void Start()
 	{
 		lifeSystem.OnReceiveDamage.AddListener((value) => ReceiveDamage());
 		lifeSystem.OnDeath.AddListener(() => Dead());
+		dialogueManager.OnFinishDialogue.AddListener(()=> FinishDialogue());
 
 		animTalk.gameObject.SetActive(false);
 
@@ -65,9 +71,12 @@ public class Player : MonoBehaviour
 	{
 		if (!isDead)
 		{
-			ReadingInputs();
-			MovementsAndAnimations();
-			AttackSystem();
+			if (!isDialogueControl)
+			{
+				ReadingInputs();
+				MovementsAndAnimations();
+				AttackSystem();
+			}
 		}
 	}
 
@@ -80,6 +89,12 @@ public class Player : MonoBehaviour
 
 			if (isInteracting)
 			{
+				if (isDialogue)
+				{
+					dialogueManager.StartDialogue(currentDialogue);
+					isDialogueControl = true;
+					return;
+				}
 
 				//Triggereo con un quest
 				if (currentQuestSystem != null)
@@ -87,7 +102,6 @@ public class Player : MonoBehaviour
 					Debug.Log("Poner la lamparaaa");
 					currentQuestSystem.PutLamp(inventorySystem.GetLampFromInventory());
 				}
-
 
 				//Activar mensaje de dialogo
 
@@ -154,6 +168,18 @@ public class Player : MonoBehaviour
 	{
 		isDead = true;
 		anim.SetTrigger("isDead");
+	}
+
+	public void StartDialogue(DialogueLine[] lines)
+	{
+		currentDialogue = lines;
+		isDialogue = true;
+	}
+
+	private void FinishDialogue()
+	{
+		isDialogue = false;
+		isDialogueControl = false;
 	}
 
 	private Collider2D CheckNextTile()
