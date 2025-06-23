@@ -15,4 +15,11 @@ public static class GlobalData
 	#endregion
 
 
+	#region Player
+	[Header("Next player position")]
+	//Default position
+	public static Vector3 playerStartPosition = new Vector3(-6.5f, -5.5f, 0f);
+	//Default rotation
+	public static Vector2 PlayerStartRotation = new Vector2(0, -1);
+	#endregion
 }

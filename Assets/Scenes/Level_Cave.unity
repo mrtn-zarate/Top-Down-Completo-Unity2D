@@ -53880,6 +53880,18 @@ PrefabInstance:
       propertyPath: toScene
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 551752891842488570, guid: 020deb286df332c449f4dc1b28cf4872, type: 3}
+      propertyPath: newPlayerPosition.x
+      value: -20.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 551752891842488570, guid: 020deb286df332c449f4dc1b28cf4872, type: 3}
+      propertyPath: newPlayerPosition.y
+      value: 11.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 551752891842488570, guid: 020deb286df332c449f4dc1b28cf4872, type: 3}
+      propertyPath: newPlayerRotation.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 1009534045683994021, guid: 020deb286df332c449f4dc1b28cf4872, type: 3}
       propertyPath: m_Name
       value: Teleporter

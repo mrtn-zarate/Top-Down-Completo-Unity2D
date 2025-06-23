@@ -50,10 +50,15 @@ public class Player : MonoBehaviour
 
 	void Start()
 	{
-		lifeSystem.OnReceiveDamage.AddListener((value)=> ReceiveDamage());
+		lifeSystem.OnReceiveDamage.AddListener((value) => ReceiveDamage());
 		lifeSystem.OnDeath.AddListener(() => Dead());
 
 		animTalk.gameObject.SetActive(false);
+
+		//Move player to last entrance position saved
+		this.transform.position = GlobalData.playerStartPosition;
+		this.inputH = GlobalData.PlayerStartRotation.x;
+		this.inputV = GlobalData.PlayerStartRotation.y;
 	}
 
 	void Update()
