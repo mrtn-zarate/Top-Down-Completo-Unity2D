@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 	private LifeSystem lifeSystem;
 	private InventorySystem inventorySystem;
 	private DialogueManager dialogueManager;
+	private PlayerLifeCanvas playerLifeCanvas;
 	private Animator anim;
 	private Collider2D nextTile;
 	private Vector3 destination;
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
 		lifeSystem = this.GetComponent<LifeSystem>();
 		inventorySystem = this.GetComponent<InventorySystem>();
 		dialogueManager = this.GetComponentInChildren<DialogueManager>();
+		playerLifeCanvas = this.GetComponentInChildren<PlayerLifeCanvas>();
 	}
 
 	void Start()
@@ -60,6 +62,8 @@ public class Player : MonoBehaviour
 		dialogueManager.OnFinishDialogue.AddListener(() => FinishDialogue());
 
 		inventorySystem.SetInventory();
+		lifeSystem.CheckCurrentLife();
+		playerLifeCanvas.SetVisualLife(lifeSystem.GetCurrentLife());
 		animTalk.gameObject.SetActive(false);
 
 		//Move player to last entrance position saved

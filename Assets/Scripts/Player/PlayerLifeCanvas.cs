@@ -14,7 +14,7 @@ public class PlayerLifeCanvas : MonoBehaviour
 		lifeSystemReference.OnRemainingLife.AddListener((value) => SetVisualLife(value));
 	}
 
-	private void SetVisualLife(float value)
+	public void SetVisualLife(float value)
 	{
 		barReference.fillAmount = value / 100f;
 	}
