@@ -189,7 +189,7 @@ public class Player : MonoBehaviour
 			isInteracting = true;
 
 			if (collision.CompareTag("InteractionObject")) currentObject = collision.gameObject;
-			if(collision.CompareTag("InteractionPilar")) currentQuestSystem = collision.GetComponent<QuestSystem>();
+			if (collision.CompareTag("InteractionPilar")) currentQuestSystem = collision.GetComponent<QuestSystem>();
 		}
 	}
 

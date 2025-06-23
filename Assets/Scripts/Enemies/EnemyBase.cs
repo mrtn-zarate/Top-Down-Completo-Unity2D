@@ -13,6 +13,7 @@ public class EnemyBase : MonoBehaviour
 	[SerializeField] private float walkVelocity = 1;
 	[SerializeField] private float attackDamage = 10;
 	[SerializeField] private Transform[] waypoints;
+	[SerializeField] private GameObject heartPrefab;
 	#endregion
 
 	#region Private variables
@@ -62,6 +63,7 @@ public class EnemyBase : MonoBehaviour
 	{
 		anim.SetTrigger("isDead");
 		isDead = true;
+		Instantiate(heartPrefab, this.transform.position, Quaternion.identity);
 	}
 
 	private void SetNewDestination()

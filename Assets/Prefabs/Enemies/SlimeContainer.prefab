@@ -120,6 +120,7 @@ MonoBehaviour:
   - {fileID: 311574982202046168}
   - {fileID: 8796666154260187950}
   - {fileID: 179019095528313777}
+  heartPrefab: {fileID: 5778990798671271447, guid: a5dcc101ac9e4c549bdd69a003ce9a88, type: 3}
 --- !u!114 &7644739340248020509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,11 +133,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4097e7841e2be48a070fb4e769887e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 100
+  life: 50
   OnReceiveDamage:
     m_PersistentCalls:
       m_Calls: []
   OnReceiveHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRemainingLife:
     m_PersistentCalls:
       m_Calls: []
   OnDeath:

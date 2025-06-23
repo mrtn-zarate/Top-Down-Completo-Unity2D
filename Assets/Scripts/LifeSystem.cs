@@ -27,9 +27,11 @@ public class LifeSystem : MonoBehaviour
 	}
 
 	public float GetCurrentLife() => life;
-	public void AddLife(float value) {
+	public void AddLife(float value)
+	{
 		life += value;
 		OnReceiveHeal?.Invoke(value);
+		OnRemainingLife?.Invoke(life);
 	} 
 	public void SetLife(float value) => life = value;
 

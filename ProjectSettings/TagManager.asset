@@ -11,6 +11,7 @@ TagManager:
   - InteractionPoint
   - InteractionObject
   - InteractionPilar
+  - Life
   layers:
   - Default
   - TransparentFX

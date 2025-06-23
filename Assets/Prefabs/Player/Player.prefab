@@ -743,6 +743,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   animTalk: {fileID: 6058390059695104638}
+  heartParticles: {fileID: 5412898811900851419, guid: 2c3613788e9d6b341b0418f956bff17b, type: 3}
 --- !u!61 &4648211779511215954
 BoxCollider2D:
   m_ObjectHideFlags: 0
