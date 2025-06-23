@@ -158,6 +158,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6335063812692794375, guid: 626722d26043b7647b78f9c88a9c07f8, type: 3}
+      propertyPath: idLamp
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335063812692794375, guid: 626722d26043b7647b78f9c88a9c07f8, type: 3}
       propertyPath: currentDialogue
       value: 
       objectReference: {fileID: 11400000, guid: 902902514fd30254cb95c7c553c32461, type: 2}

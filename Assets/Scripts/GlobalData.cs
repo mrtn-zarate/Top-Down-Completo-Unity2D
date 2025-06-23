@@ -22,4 +22,8 @@ public static class GlobalData
 	//Default rotation
 	public static Vector2 PlayerStartRotation = new Vector2(0, -1);
 	#endregion
+
+	#region Lamps
+	public static List<int> listOfLamps = new List<int>();
+	#endregion
 }

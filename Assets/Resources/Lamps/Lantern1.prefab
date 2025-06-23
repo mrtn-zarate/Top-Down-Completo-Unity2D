@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985af12636cc07245856575bed2a34a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idLamp: 10
   objectReference: {fileID: 4362432406463622100}
   currentDialogue: {fileID: 11400000, guid: b2a05bbf56cfac34796d92d7d024b672, type: 2}
 --- !u!61 &7980603290938349615

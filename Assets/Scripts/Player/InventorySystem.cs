@@ -12,35 +12,57 @@ public class InventorySystem : MonoBehaviour
 	private GameObject inventoryObjectReference1;
 	private GameObject inventoryObjectReference2;
 
+	void Awake()
+	{
+		inventorySpace1.gameObject.SetActive(false);
+		inventorySpace2.gameObject.SetActive(false);
+	}
+
 	void Start()
 	{
 		// 	inventorySpace1.sprite = null;
 		// 	inventorySpace2.sprite = null;
-		inventorySpace1.gameObject.SetActive(false);
-		inventorySpace2.gameObject.SetActive(false);
 	}
 
 	public void SetInventory()
 	{
 		//Cuando cambiemos de escena, hay que rellenar el inventario
-		int savedID1 = PlayerPrefs.GetInt(inventorySpace1.name, -1);
-		int savedID2 = PlayerPrefs.GetInt(inventorySpace2.name, -1);
-
-		SODialogue[] allSO = Resources.LoadAll<SODialogue>("Dialogues");
+		// int savedID1 = PlayerPrefs.GetInt(inventorySpace1.name, -1);
+		// int savedID2 = PlayerPrefs.GetInt(inventorySpace2.name, -1);
 
 		// if (savedID1 != -1)
 		// {
 		// 	var
 		// }
+
+		Debug.Log("Set inventory data");
+		GameObject[] allLamps = Resources.LoadAll<GameObject>("Lamps");
+
+		foreach (GameObject lamp in allLamps)
+		{
+			var lampData = lamp.GetComponent<InteractionObject>();
+			Debug.Log("Check this lamp: " + lampData.name);
+
+			foreach (var savedData in GlobalData.listOfLamps)
+			{
+				if (lampData.GetLampId() == savedData)
+				{
+					Debug.Log("Add to inventory uwu");
+					AddToInventory(lamp);
+				}
+			}
+		}
 	}
 
 	public void AddToInventory(GameObject inventoryObject)
 	{
 
 		InteractionObject newObject = inventoryObject.GetComponent<InteractionObject>();
+		Debug.Log("Ref interaction object: " + newObject.name);
 
 		//Obtain the image reference
 		Sprite imageReference = inventoryObject.GetComponent<SpriteRenderer>().sprite;
+		Debug.Log("sprite interaction object: " + imageReference.name);
 
 		//Obtain unique id
 		int objectID = newObject.GetSO().dialogues[0].id;
@@ -48,12 +70,14 @@ public class InventorySystem : MonoBehaviour
 		//Show object in the inventory
 		if (!inventorySpace1.gameObject.activeInHierarchy)
 		{
+			Debug.Log("inventory space 1 available: ");
 			inventorySpace1.sprite = imageReference;
 			inventorySpace1.gameObject.SetActive(true);
 			PlayerPrefs.SetInt(inventorySpace1.name, objectID);
 		}
 		else if (!inventorySpace2.gameObject.activeInHierarchy)
 		{
+			Debug.Log("inventory space 1 available: ");
 			inventorySpace2.sprite = imageReference;
 			inventorySpace2.gameObject.SetActive(true);
 			PlayerPrefs.SetInt(inventorySpace2.name, objectID);
@@ -64,7 +88,7 @@ public class InventorySystem : MonoBehaviour
 		if (inventoryObjectReference1 == null) inventoryObjectReference1 = inventoryObject;
 		if (inventoryObjectReference2 == null) inventoryObjectReference2 = inventoryObject;
 
-		Destroy(inventoryObject);
+		// Destroy(inventoryObject);
 		PlayerPrefs.Save();
 	}
 

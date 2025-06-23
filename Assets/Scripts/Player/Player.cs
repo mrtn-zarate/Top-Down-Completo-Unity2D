@@ -57,8 +57,9 @@ public class Player : MonoBehaviour
 	{
 		lifeSystem.OnReceiveDamage.AddListener((value) => ReceiveDamage());
 		lifeSystem.OnDeath.AddListener(() => Dead());
-		dialogueManager.OnFinishDialogue.AddListener(()=> FinishDialogue());
+		dialogueManager.OnFinishDialogue.AddListener(() => FinishDialogue());
 
+		inventorySystem.SetInventory();
 		animTalk.gameObject.SetActive(false);
 
 		//Move player to last entrance position saved
@@ -101,6 +102,7 @@ public class Player : MonoBehaviour
 				{
 					Debug.Log("Poner la lamparaaa");
 					currentQuestSystem.PutLamp(inventorySystem.GetLampFromInventory());
+					return;
 				}
 
 				//Activar mensaje de dialogo
@@ -109,6 +111,7 @@ public class Player : MonoBehaviour
 				{
 					// Destroy(currentObject);
 					inventorySystem.AddToInventory(currentObject);
+					currentObject.GetComponent<InteractionObject>().GetLamp();
 				}
 				return;
 			}
@@ -219,7 +222,12 @@ public class Player : MonoBehaviour
 			animTalk.SetBool("isQuestion", true);
 			isInteracting = true;
 
-			if (collision.CompareTag("InteractionObject")) currentObject = collision.gameObject;
+			if (collision.CompareTag("InteractionObject"))
+			{
+				Debug.Log("Guardar este objeto: " + collision.gameObject.name);
+				currentObject = collision.gameObject;
+			}
+
 			if (collision.CompareTag("InteractionPilar")) currentQuestSystem = collision.GetComponent<QuestSystem>();
 		}
 	}
