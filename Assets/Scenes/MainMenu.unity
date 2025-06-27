@@ -777,7 +777,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit The Game
+  m_text: Salir
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26bbec1b50a247a46ae8bdabc5b274c2, type: 2}
   m_sharedMaterial: {fileID: -6313499969421577749, guid: 26bbec1b50a247a46ae8bdabc5b274c2, type: 2}
@@ -1281,7 +1281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start The Game
+  m_text: Comenzar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26bbec1b50a247a46ae8bdabc5b274c2, type: 2}
   m_sharedMaterial: {fileID: -6313499969421577749, guid: 26bbec1b50a247a46ae8bdabc5b274c2, type: 2}
@@ -3004,15 +3004,6 @@ MonoBehaviour:
   OnSceneLoadComplete:
     m_PersistentCalls:
       m_Calls: []
-  transitionPanel: {fileID: 1931197994}
-  animTransition:
-  - {fileID: 1451214050}
-  - {fileID: 2040764025}
-  - {fileID: 996508281}
-  - {fileID: 1162613174}
-  - {fileID: 834913807}
-  - {fileID: 419123197}
-  - {fileID: 1236724792}
 --- !u!114 &2081627232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3247,7 +3238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Credits
+  m_text: Creditos
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26bbec1b50a247a46ae8bdabc5b274c2, type: 2}
   m_sharedMaterial: {fileID: -6313499969421577749, guid: 26bbec1b50a247a46ae8bdabc5b274c2, type: 2}

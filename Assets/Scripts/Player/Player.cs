@@ -259,6 +259,8 @@ public class Player : MonoBehaviour
 
 			if (collision.CompareTag("InteractionObject")) currentObject = null;
 			if (collision.CompareTag("InteractionPilar")) currentQuestSystem = null;
+
+			dialogueManager.EndDialogue();
 		}
 	}
 	#endregion
