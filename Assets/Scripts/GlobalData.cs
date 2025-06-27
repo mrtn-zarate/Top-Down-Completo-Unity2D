@@ -26,5 +26,6 @@ public static class GlobalData
 
 	#region Lamps
 	public static List<int> listOfLamps = new List<int>();
+	public static List<string> listOfQuest = new List<string>();
 	#endregion
 }

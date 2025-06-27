@@ -53,7 +53,7 @@ public class SceneChanger : MonoBehaviour
 		// 	anim.SetTrigger("transition");	
 		// }
 
-		yield return new WaitForSeconds(2f);
+													// yield return new WaitForSeconds(2f);
 
 		AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
 		while (!asyncOperation.isDone)
@@ -67,7 +67,7 @@ public class SceneChanger : MonoBehaviour
 		// 	anim.SetBool("isEntrance", false);
 		// 	anim.SetTrigger("transition");
 		// }
-		yield return new WaitForSeconds(2f);
+												// yield return new WaitForSeconds(2f);
 		// transitionPanel.SetActive(false);
 		OnSceneLoadComplete?.Invoke();
 	}
@@ -80,7 +80,7 @@ public class SceneChanger : MonoBehaviour
 		// 	anim.SetBool("isEntrance", true);
 		// 	anim.SetTrigger("transition");	
 		// }
-		yield return new WaitForSeconds(2f);
+														// yield return new WaitForSeconds(2f);
 
 		AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneNumber);
 		while (!asyncOperation.isDone)
@@ -94,7 +94,7 @@ public class SceneChanger : MonoBehaviour
 		// 	anim.SetBool("isEntrance", false);
 		// 	anim.SetTrigger("transition");
 		// }
-		yield return new WaitForSeconds(2f);
+														// yield return new WaitForSeconds(2f);
 		// transitionPanel.SetActive(false);
 		OnSceneLoadComplete?.Invoke();
 	}

@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 	private bool isDialogueControl = false;
 	private bool isMoving = false;
 	private bool isDead = false;
+	private bool canMove = false;
 	private GameObject currentObject = null;
 	private QuestSystem currentQuestSystem = null;
 	private DialogueLine[] currentDialogue = null;
@@ -70,10 +71,14 @@ public class Player : MonoBehaviour
 		this.transform.position = GlobalData.playerStartPosition;
 		this.inputH = GlobalData.PlayerStartRotation.x;
 		this.inputV = GlobalData.PlayerStartRotation.y;
+
+		StartCoroutine(WaitForASecToMove());
 	}
 
 	void Update()
 	{
+		if (!canMove) return;
+
 		if (!isDead)
 		{
 			if (!isDialogueControl)
@@ -212,6 +217,12 @@ public class Player : MonoBehaviour
 
 		interactionPoint = this.transform.position + lastInput;
 		isMoving = false;
+	}
+
+	private IEnumerator WaitForASecToMove()
+	{
+		yield return new WaitForSeconds(0.5f);
+		canMove = true;
 	}
 	#endregion
 

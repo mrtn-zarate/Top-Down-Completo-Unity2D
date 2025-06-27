@@ -11,6 +11,7 @@ public class InventorySystem : MonoBehaviour
 
 	private GameObject inventoryObjectReference1;
 	private GameObject inventoryObjectReference2;
+	private Dictionary<string, GameObject> listOfLampsRef = new Dictionary<string, GameObject>();
 
 	void Awake()
 	{
@@ -67,6 +68,8 @@ public class InventorySystem : MonoBehaviour
 		//Obtain unique id
 		int objectID = newObject.GetSO().dialogues[0].id;
 
+		GameObject currentSpaceSelection = null;
+
 		//Show object in the inventory
 		if (!inventorySpace1.gameObject.activeInHierarchy)
 		{
@@ -74,6 +77,7 @@ public class InventorySystem : MonoBehaviour
 			inventorySpace1.sprite = imageReference;
 			inventorySpace1.gameObject.SetActive(true);
 			PlayerPrefs.SetInt(inventorySpace1.name, objectID);
+			currentSpaceSelection = inventorySpace1.gameObject;
 		}
 		else if (!inventorySpace2.gameObject.activeInHierarchy)
 		{
@@ -81,6 +85,7 @@ public class InventorySystem : MonoBehaviour
 			inventorySpace2.sprite = imageReference;
 			inventorySpace2.gameObject.SetActive(true);
 			PlayerPrefs.SetInt(inventorySpace2.name, objectID);
+			currentSpaceSelection = inventorySpace2.gameObject;
 
 		}
 
@@ -90,6 +95,27 @@ public class InventorySystem : MonoBehaviour
 
 		// Destroy(inventoryObject);
 		PlayerPrefs.Save();
+
+		if (currentSpaceSelection != null) {
+			listOfLampsRef.Add(inventoryObject.name, currentSpaceSelection);
+		}
+	}
+
+	public void RemoveFromInventory(GameObject inventoryObject)
+	{
+		foreach (var obj in listOfLampsRef)
+		{
+			if (obj.Key == inventoryObject.name)
+			{
+				Image spaceComponent = obj.Value.GetComponent<Image>();
+				spaceComponent.sprite = null;
+				spaceComponent.gameObject.SetActive(false);
+
+				
+
+				listOfLampsRef.Remove(obj.Key);
+			}
+		}
 	}
 
 	public GameObject GetLampFromInventory()

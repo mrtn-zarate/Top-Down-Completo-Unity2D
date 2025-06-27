@@ -566,8 +566,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184.61, y: -110}
-  m_SizeDelta: {x: 641.5219, y: 159.2644}
+  m_AnchoredPosition: {x: -163.95395, y: -125.26752}
+  m_SizeDelta: {x: 600.2098, y: 189.7994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &360165913
 MonoBehaviour:
@@ -589,9 +589,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hugo Alejandro Gonzalez Herrera
-
-    Martin Ozier Zarate Encinas'
+  m_text: "Hugo Alejandro Gonzalez Herrera\nMartin Ozier Zarate Encinas\nAbraham
+    Calder\xF3n Mej\xEDa"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 26bbec1b50a247a46ae8bdabc5b274c2, type: 2}
   m_sharedMaterial: {fileID: -6313499969421577749, guid: 26bbec1b50a247a46ae8bdabc5b274c2, type: 2}
